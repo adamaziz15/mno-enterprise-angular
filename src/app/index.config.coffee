@@ -25,13 +25,15 @@ angular.module 'mnoEnterpriseAngular'
   )
 
   .config ($httpProvider) ->
-    $httpProvider.interceptors.push ($q, $window) ->
+    $httpProvider.interceptors.push ($q, $window, $injector, $log) ->
       {
         responseError: (rejection) ->
           if rejection.status == 401
             # Redirect to login page
-            console.log "User is not connected!"
-            $window.location.href = '/'
+            toastr = $injector.get('toastr')
+            
+            toastr.error('User is not connected!')
+            $log.error('User is not connected!')
 
           $q.reject rejection
       }
@@ -84,3 +86,23 @@ angular.module 'mnoEnterpriseAngular'
     # TODO: Activate in "developer mode" only (spams the console and makes the application lag)
     # $translateProvider.useMissingTranslationHandlerLog()
   )
+  # Configure auth routes
+  .config((AuthProvider, $windowProvider, AuthInterceptProvider) ->
+    basePath = $windowProvider.$get().location.origin
+    AuthProvider.loginPath(basePath + '/mnoe/auth/users/sign_in')
+    AuthProvider.logoutPath(basePath + '/mnoe/auth/users/sign_out')
+    AuthProvider.registerPath(basePath + '/mnoe/auth/users/')
+    AuthProvider.sendResetPasswordInstructionsPath(basePath + '/mnoe/auth/users/password')
+    AuthProvider.resetPasswordPath(basePath + '/mnoe/auth/users/password')
+    AuthInterceptProvider.interceptAuth(true)
+  )
+
+
+
+
+
+
+
+
+
+

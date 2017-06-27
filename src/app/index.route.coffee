@@ -28,6 +28,16 @@ angular.module 'mnoEnterpriseAngular'
         controller: 'LandingProductCtrl'
         controllerAs: 'vm'
         public: true
+      .state 'login',
+        data:
+          pageTitle: 'Login'
+        url: '/login'
+        templateUrl: 'app/views/auth/login/login.html'
+        controller: 'AuthLoginCtrl'
+        controllerAs: 'vm'
+        resolve:
+          skipIfLoggedIn: (MnoeCurrentUser) ->
+            MnoeCurrentUser.skipIfLoggedIn()
       .state 'home',
         data:
           pageTitle:'Home'
@@ -45,6 +55,9 @@ angular.module 'mnoEnterpriseAngular'
         url: '/apps'
         templateUrl: 'app/views/apps/dashboard-apps-list.html'
         controller: 'DashboardAppsListCtrl'
+        resolve:
+          resourcesLoaded: ($rootScope) ->
+            $rootScope.resourcesLoaded
       .state 'home.impac',
         data:
           pageTitle:'Impac'
@@ -68,22 +81,14 @@ angular.module 'mnoEnterpriseAngular'
         controllerAs: 'vm'
       .state 'logout',
         url: '/logout'
-        controller: ($window, $http, $translate, AnalyticsSvc, URL_CONFIG) ->
+        controller: ($state, Auth, toastr, AnalyticsSvc, MnoeCurrentUser) ->
           'ngInject'
 
           # Logout and redirect the user
-          $http.delete(URI.logout).then( ->
+          Auth.logout().then(->
             AnalyticsSvc.logOut()
-
-            logout_url = URL_CONFIG.after_sign_out_url || URI.login
-
-            if I18N_CONFIG.enabled
-              if URL_CONFIG.after_sign_out_url
-                $window.location.href = logout_url
-              else
-                $window.location.href = "/#{$translate.use()}#{URI.login}"
-            else
-              $window.location.href = logout_url
+            toastr.info('You have been logged out.')
+            $state.go('login')
           )
 
     if MnoeConfigProvider.$get().isOnboardingWizardEnabled()
@@ -128,6 +133,9 @@ angular.module 'mnoEnterpriseAngular'
           templateUrl: 'app/views/marketplace/marketplace.html'
           controller: 'DashboardMarketplaceCtrl'
           controllerAs: 'vm'
+          resolve:
+            resourcesLoaded: ($rootScope) ->
+              $rootScope.resourcesLoaded
         .state 'home.marketplace.app',
           data:
             pageTitle:'Marketplace'

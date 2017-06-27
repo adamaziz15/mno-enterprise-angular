@@ -1,0 +1,151 @@
+//---------------------------------------------------------------------------
+// Material Style
+//---------------------------------------------------------------------------
+.registration-material {
+  height: 90%;
+  width: 100%;
+  position: absolute;
+  background-color: @login-bg-color;
+  text-align: center;
+
+  .action-box {
+    height: 90%;
+  }
+
+  .action-box md-input-container {
+    text-align: left;
+  }
+
+  .action-box md-checkbox {
+    text-align: left;
+  }
+}
+
+// Default style
+
+.registration when (isstring(@login-bg-img)) {
+  background-image: url(@login-bg-img);
+  background-size: cover;
+}
+
+.registration {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  background-color: @login-bg-color;
+
+  .login-box-wrapper {
+    text-align: center;
+    @login-box-grid-position();
+  }
+
+  .login-box-wrapper.large {
+    text-align: center;
+    margin-top: 80px;
+    width: 100%;
+    max-width: 400px;
+  }
+
+  .login-box-wrapper md-input-container {
+    text-align: left;
+  }
+
+  .login-box-wrapper .login-box-title {
+    color: @login-box-title-color;
+    margin-bottom: 15px;
+    @login-box-title();
+  }
+
+  .login-box-wrapper .login-box {
+    padding: @login-box-padding;
+    background-color: @login-box-bg-color;
+    border-radius: @login-box-corners;
+
+      .loader {
+        content: url(../images/loader-32x32-bg-inverse.gif)
+      }
+  }
+
+  .login-box-wrapper .login-box .brand-logo when (isstring(@login-box-brand-logo-img)){
+    min-height: 80px;
+    background-repeat: no-repeat;
+    background-image: url(@login-box-brand-logo-img);
+    background-size: 100%;
+    @login-box-brand-logo();
+  }
+
+  .login-box-wrapper .login-box .btn-login {
+    @login-box-btn-login();
+  }
+
+
+  .login-box-wrapper .login-box:before when (@login-box-title-display-box-arrow = true){
+    .fa;
+    color: @login-box-bg-color;
+    display: block;
+    content: @fa-var-caret-up;
+    margin-top: -27px;
+    font-size: 24px;
+    line-height: 8px;
+    max-width: 60%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .login-box .sign-in-using {
+    color: @decorator-main-color;
+    margin-top: 5px;
+  }
+  .login-box .oauth-sso {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: center;
+    align-items: center;
+    margin-top: 5px;
+
+    .omniauth i {
+      display: inline-block;
+      border-radius: 3px;
+      color: @login-box-oauth-text-color;
+      width: 25px;
+      height: 25px;
+      margin: 0 5px;
+      line-height: 25px;
+      text-align: center;
+
+      &.fa-facebook {
+        background: @login-box-oauth-bg-color-facebook;
+      }
+      &.fa-google {
+        background: @login-box-oauth-bg-color-google;
+      }
+      &.fa-linkedin {
+        background: @login-box-oauth-bg-color-linkedin;
+      }
+    }
+    .omniauth.intuit {
+      background: @login-box-oauth-bg-color-intuit;
+      height: 25px;
+      width: 50px;
+      display: inline-block;
+      margin: 0 5px;
+      border-radius: 3px;
+      background-position: 50%;
+      background-repeat: no-repeat;
+      background-size: 40px auto;
+      background-image: url(@login-box-sso-intuit-logo);
+    }
+  }
+
+  .login-box h3, .login-box h5, .login-box p {
+    color: @text-inverse-strong-color;
+  }
+
+  .checkbox-section label {
+    font-weight: normal;
+  }
+
+  .login-box-wrapper .login-box .phone select.form-control {
+    height: 34px;
+  }
+}

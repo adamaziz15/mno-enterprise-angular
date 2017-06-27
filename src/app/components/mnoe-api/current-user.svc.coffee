@@ -13,7 +13,7 @@
 # => PUT /mnoe/jpi/v1/current_user/update_password
 
 angular.module 'mnoEnterpriseAngular'
-  .service 'MnoeCurrentUser', (MnoeApiSvc, $window, $state, $rootScope, URI, MnoeConfig) ->
+  .service 'MnoeCurrentUser', (MnoeApiSvc, $window, $state, $q, $timeout, $rootScope, URI, Auth, MnoeConfig) ->
     _self = @
 
     # Store the current_user promise
@@ -23,12 +23,33 @@ angular.module 'mnoEnterpriseAngular'
     # Save the current user in variable to be able to reference it directly
     @user = {}
 
+    # Redirect if user is already logged in
+    @skipIfLoggedIn = ->
+      Auth.currentUser().then(
+        ->
+          $timeout( -> $state.go('home.impac') )
+          $q.reject()
+        ->
+          $q.resolve()
+      )
+
+    @loginRequired = ->
+      Auth.currentUser().catch(
+        ->
+          $timeout( -> $state.go('login') )
+          $q.reject()
+      )
+
     # Get the current user
     @get = ->
       return userPromise if userPromise?
       userPromise = MnoeApiSvc.one('current_user').get().then(
         (response) ->
           response = response.plain()
+
+          if !response.logged_in
+            $state.go('login')
+
           angular.copy(response, _self.user)
           response
       )
