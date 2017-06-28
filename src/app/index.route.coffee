@@ -38,6 +38,16 @@ angular.module 'mnoEnterpriseAngular'
         resolve:
           skipIfLoggedIn: (MnoeCurrentUser) ->
             MnoeCurrentUser.skipIfLoggedIn()
+      .state 'signup',
+        data:
+          pageTitle: 'SignUp'
+        url: '/signup'
+        templateUrl: 'app/views/auth/signup/signup.html'
+        controller: 'AuthSignUpCtrl'
+        controllerAs: 'vm'
+        resolve:
+          skipIfLoggedIn: (MnoeCurrentUser) ->
+            MnoeCurrentUser.skipIfLoggedIn()
       .state 'home',
         data:
           pageTitle:'Home'

@@ -21,7 +21,7 @@
               <button class='btn btn-warning btn-login' ng-click='vm.hasClicked = true' ng-disabled='vm.form.$invalid' ng-hide='vm.hasClicked' type='submit'>
               {{'mno_enterprise.auth.sessions.new.sign_in' | translate}}
               </button>
-              <img class='loader' ng-show='vm.hasClicked' ng-src='../images/loader-32x32-bg-inverse.gif'>
+              <img class='loader' ng-show='vm.hasClicked'>
             </div>
             <br>
             <div class='form-inline checkbox-section'>
@@ -31,7 +31,7 @@
           </form>
 
           <hr>
-          <a href="/mnoe/auth/users/sign_up">{{'mno_enterprise.auth.shared.links.signup' | translate}}</a>
+          <a ui-sref="signup">{{'mno_enterprise.auth.shared.links.signup' | translate}}</a>
           <br>
           <a href="/mnoe/auth/users/password/new">{{'mno_enterprise.auth.shared.links.recover_password' | translate}}</a>
           <br>
