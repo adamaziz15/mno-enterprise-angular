@@ -1,9 +1,7 @@
 angular.module 'mnoEnterpriseAngular'
   .controller('AuthLoginCtrl',
-    ($rootScope, Auth, toastr, $state) ->
+    (Auth, toastr, $state) ->
       vm = @
-
-      $rootScope.isLoggedIn = true
 
       vm.login = ->
         Auth.login(vm.user).then(
