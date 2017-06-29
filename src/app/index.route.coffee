@@ -36,6 +36,27 @@ angular.module 'mnoEnterpriseAngular'
         controller: 'AuthLoginCtrl'
         controllerAs: 'vm'
         resolve:
+          # Redirect the user to the platform if he is already logged in
+          skipIfLoggedIn: (MnoeCurrentUser) ->
+            MnoeCurrentUser.skipIfLoggedIn()
+      .state 'password_recovery',
+        data:
+          pageTitle: 'PasswordRecovery'
+        url: '/password/new'
+        templateUrl: 'app/views/auth/password/recovery.html'
+        controller: 'PasswordRecoveryCtrl'
+        controllerAs: 'vm'
+        resolve:
+          skipIfLoggedIn: (MnoeCurrentUser) ->
+            MnoeCurrentUser.skipIfLoggedIn()
+      .state 'password_reset',
+        data:
+          pageTitle: 'PasswordReset'
+        url: '/password/reset'
+        templateUrl: 'app/views/auth/password/reset.html'
+        controller: 'PasswordResetCtrl'
+        controllerAs: 'vm'
+        resolve:
           skipIfLoggedIn: (MnoeCurrentUser) ->
             MnoeCurrentUser.skipIfLoggedIn()
       .state 'signup',
