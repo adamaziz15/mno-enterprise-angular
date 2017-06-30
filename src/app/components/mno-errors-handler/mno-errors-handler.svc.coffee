@@ -26,7 +26,7 @@ angular.module 'mnoEnterpriseAngular'
       result = []
       if errorCache?
         _.each errorCache[name], (msg) ->
-          result.push msg
+          result.push [ _.capitalize(name), msg ].join ' '
       result.join ', '
 
     mnoErrorHandler.resetErrors = (form) ->
