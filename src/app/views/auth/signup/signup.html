@@ -10,12 +10,12 @@
           <form name="vm.form" class="form-horizontal autofill-detect" autocomplete="off" id="new_user" ng-submit="vm.signup()">
             <div class='row'>
               <div class='col-sm-12'>
-                <input placeholder="*Email" required="required" ng-model="vm.user.email" class="form-control" type="email" name="email" id="user_email"/>
+                <input placeholder="*Email" required="required" ng-model="vm.user.email" class="form-control" type="email" name="email" id="user_email" ng-change="vm.checkServerErrors()"/>
                 <div class="text-danger text-left" ng-if="vm.form.email.$dirty || vm.form.$submitted" ng-messages="vm.form.email.$error">
                   <p ng-message="required">Email Required</p>
                   <p ng-message="email">Invalid Email</p>
                   <p ng-message="server">{{ vm.errorHandler.errorMessage('email') }}</p>
-                </div>                
+                </div>
               </div>
             </div>
             <br>
@@ -46,7 +46,7 @@
               </div>
             </div>
           </form>
-          
+
           <hr>
           <a ui-sref="login">{{'mno_enterprise.auth.shared.links.login' | translate}}</a>
           <br>

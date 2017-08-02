@@ -39,6 +39,21 @@ angular.module 'mnoEnterpriseAngular'
           # Redirect the user to the platform if he is already logged in
           skipIfLoggedIn: (MnoeCurrentUser) ->
             MnoeCurrentUser.skipIfLoggedIn()
+    $stateProvider
+      .state 'confirmation_lounge',
+        data:
+          pageTitle: 'Lounge'
+        params: {
+          email: null
+        }
+        url: '/confirmation/lounge'
+        templateUrl: 'app/views/auth/confirmation/lounge.html'
+        controller: 'AuthLoungeCtrl'
+        controllerAs: 'vm'
+        resolve:
+          # Redirect the user to the platform if he is already logged in
+          skipIfLoggedIn: (MnoeCurrentUser) ->
+            MnoeCurrentUser.skipIfLoggedIn()
       .state 'password_recovery',
         data:
           pageTitle: 'PasswordRecovery'

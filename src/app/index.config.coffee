@@ -31,7 +31,7 @@ angular.module 'mnoEnterpriseAngular'
           if rejection.status == 401
             # Redirect to login page
             toastr = $injector.get('toastr')
-            
+
             toastr.error('User is not connected!')
             $log.error('User is not connected!')
 
@@ -87,13 +87,12 @@ angular.module 'mnoEnterpriseAngular'
     # $translateProvider.useMissingTranslationHandlerLog()
   )
   # Configure auth routes
-  .config((AuthProvider, $windowProvider, AuthInterceptProvider) ->
-    basePath = $windowProvider.$get().location.origin
-    AuthProvider.loginPath(basePath + '/mnoe/auth/users/sign_in')
-    AuthProvider.logoutPath(basePath + '/mnoe/auth/users/sign_out')
-    AuthProvider.registerPath(basePath + '/mnoe/auth/users/')
-    AuthProvider.sendResetPasswordInstructionsPath(basePath + '/mnoe/auth/users/password')
-    AuthProvider.resetPasswordPath(basePath + '/mnoe/auth/users/password')
+  .config((AuthProvider, AuthInterceptProvider) ->
+    AuthProvider.loginPath('/mnoe/auth/users/sign_in')
+    AuthProvider.logoutPath('/mnoe/auth/users/sign_out')
+    AuthProvider.registerPath('/mnoe/auth/users/')
+    AuthProvider.sendResetPasswordInstructionsPath('/mnoe/auth/users/password')
+    AuthProvider.resetPasswordPath('/mnoe/auth/users/password')
     AuthInterceptProvider.interceptAuth(true)
   )
 

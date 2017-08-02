@@ -17,7 +17,7 @@
             <div class='row'>
               <div class='col-sm-12'>
                 <div class='text-center'>
-                  <button class='btn btn-warning' ng-click='vm.hasClicked = true' ng-disabled='vm.form.$invalid' ng-hide='vm.hasClicked' type='submit'>{{ 'mno_enterprise.auth.passwords.new.recover' | translate}}</button>
+                  <button class='btn btn-warning' ng-click='vm.hasClicked = true' ng-disabled='vm.form.$invalid || vm.request_sent' ng-hide='vm.hasClicked' type='submit'>{{ 'mno_enterprise.auth.passwords.new.recover' | translate}}</button>
                   <img class="loader" ng-show='vm.hasClicked'>
                 </div>
               </div>

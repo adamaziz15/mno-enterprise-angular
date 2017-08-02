@@ -3,7 +3,6 @@ angular.module('mnoEnterpriseAngular')
     'ngInject'
 
     vm = this
-    vm.isLoading = false
     vm.request_sent = false
 
     vm.password_recovery = ->
@@ -11,8 +10,6 @@ angular.module('mnoEnterpriseAngular')
         return
 
       MnoErrorsHandler.resetErrors(vm.form)
-
-      vm.isLoading = true
 
       Auth.sendResetPasswordInstructions(vm.user).then(
         ->
@@ -25,7 +22,7 @@ angular.module('mnoEnterpriseAngular')
           vm.request_sent = true
           (error) ->
             MnoErrorsHandler.processServerError(error, vm.form)
-        ).finally( -> vm.isLoading = false)
+        ).finally( -> vm.hasClicked = false)
 
       return true
 
