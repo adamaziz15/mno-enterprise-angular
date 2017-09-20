@@ -76,15 +76,4 @@ angular.module 'mnoEnterpriseAngular'
     @updatePassword = (passwordData) ->
       MnoeApiSvc.all('/current_user').doPUT({user: passwordData}, 'update_password')
 
-    # Ensure user is logged in
-    @loginRequired = ->
-      _self.get().then(
-        (response) ->
-          unless response.logged_in
-            if MnoeConfig.arePublicApplicationsEnabled()
-              $state.go('public.landing')
-            else
-              $window.location = URI.login
-      )
-
     return @

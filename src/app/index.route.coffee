@@ -276,16 +276,16 @@ angular.module 'mnoEnterpriseAngular'
       MnoeCurrentUser = $injector.get('MnoeCurrentUser')
       MnoeOrganizations = $injector.get('MnoeOrganizations')
       MnoeAppInstances = $injector.get('MnoeAppInstances')
-      $window = $injector.get('$window')
 
       MnoeCurrentUser.get().then(
         (response) ->
           # Same as MnoeCurrentUser.loginRequired
+          debugger
           unless response.logged_in
             if MnoeConfig.arePublicApplicationsEnabled()
               $location.url('/landing')
             else
-              $window.location = URI.login
+              $location.url('/login')
           else
             if MnoeConfig.isOnboardingWizardEnabled()
               MnoeOrganizations.getCurrentOrganisation().then(

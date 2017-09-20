@@ -1,6 +1,6 @@
 angular.module 'mnoEnterpriseAngular'
   .controller 'LayoutController', ($scope, $rootScope, $stateParams, $state, $q, $timeout, AnalyticsSvc, MnoeCurrentUser, MnoeOrganizations,
-  MnoeMarketplace, MnoeAppInstances, ONBOARDING_WIZARD_CONFIG) ->
+  MnoeMarketplace, MnoeAppInstances, MnoeConfig) ->
     'ngInject'
 
     layout = this
@@ -21,7 +21,7 @@ angular.module 'mnoEnterpriseAngular'
         # App instances needs to be run after fetching the organization (At least the first call)
         MnoeAppInstances.getAppInstances().then(
           (appInstances) ->
-            if ONBOARDING_WIZARD_CONFIG.enabled && _.isEmpty(appInstances)
+            if MnoeConfig.isOnboardingWizardEnabled() && _.isEmpty(appInstances)
               $state.go('onboarding.step1')
 
             layout.appInstancesDeferred.resolve(appInstances)
@@ -34,7 +34,7 @@ angular.module 'mnoEnterpriseAngular'
       ->
         # Allow child state to load
         $rootScope.resourcesLoaded.resolve()
-        
+
         # Display the layout
         $rootScope.isLoggedIn = true
 
