@@ -61,10 +61,7 @@ angular.module 'mnoEnterpriseAngular'
         templateUrl: 'app/views/auth/confirmation/confirm.html'
         controller: 'AuthConfirmCtrl'
         controllerAs: 'vm'
-        resolve:
-          # Redirect the user to the platform if he is already logged in
-          skipIfLoggedIn: (MnoeCurrentUser) ->
-            MnoeCurrentUser.skipIfLoggedIn()
+        public: true
       .state 'password_recovery',
         data:
           pageTitle: 'PasswordRecovery'
@@ -277,10 +274,9 @@ angular.module 'mnoEnterpriseAngular'
       MnoeOrganizations = $injector.get('MnoeOrganizations')
       MnoeAppInstances = $injector.get('MnoeAppInstances')
 
-      MnoeCurrentUser.get().then(
+      MnoeCurrentUser.get(skip_login_check: true).then(
         (response) ->
           # Same as MnoeCurrentUser.loginRequired
-          debugger
           unless response.logged_in
             if MnoeConfig.arePublicApplicationsEnabled()
               $location.url('/landing')

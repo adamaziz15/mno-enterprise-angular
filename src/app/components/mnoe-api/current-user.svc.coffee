@@ -26,7 +26,7 @@ angular.module 'mnoEnterpriseAngular'
     # Redirect if user is already logged in
     @skipIfLoggedIn = ->
       Auth.currentUser().then(
-        ->
+        (response) ->
           $timeout( -> $state.go('home.impac') )
           $q.reject()
         ->
@@ -41,13 +41,14 @@ angular.module 'mnoEnterpriseAngular'
       )
 
     # Get the current user
-    @get = ->
+    @get = (opts = {})->
       return userPromise if userPromise?
+
       userPromise = MnoeApiSvc.one('current_user').get().then(
         (response) ->
           response = response.plain()
 
-          if !response.logged_in
+          if ! (opts.skip_login_check || response.logged_in)
             $state.go('login')
 
           angular.copy(response, _self.user)

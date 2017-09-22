@@ -274,7 +274,7 @@
                       <option value="ZA">ZA +27</option>
                       <option value="ZM">ZM +260</option>
                       <option value="ZW">ZW +263</option></select>
-                      <input placeholder="*Phone" required="required" ng-model="vm.user.phone" class="form-control" type="text" name="user[phone]" id="user_phone" />
+                      <input placeholder="*Phone" required="{{vm.phoneRequired}}" ng-model="vm.user.phone" class="form-control" type="text" name="user[phone]" id="user_phone" />
                     </div>
                   </div>
                 </div>
@@ -282,9 +282,9 @@
                 <div class='row'>
                   <div class='col-sm-12'>
                     <div class='input-group'>
-                      <input placeholder="*Choose Password" ng-model="vm.user.password" class="form-control" ng-minlength="6" mno-password-strength="true" password-score="vm.user.$pwdScore" required="required" type="password" name="user[password]" id="user_password" />
-                      <span class='input-group-addon classic pw-strength-indicator' ng-class='vm.user.$pwdScore.class'>
-                        {{ user.$pwdScore.value }}
+                      <input placeholder="*Choose Password" ng-model="vm.user.password" class="form-control" ng-minlength="6" mno-password-strength="true" password-score="vm.$pwdScore" required="required" type="password" name="user[password]" id="user_password" />
+                      <span class='input-group-addon classic pw-strength-indicator' ng-class='vm.$pwdScore.class'>
+                        {{ vm.$pwdScore.value }}
                       </span>
                     </div>
                     <div class='text-center ng-hide' ng-show='vm.user.$pwdScore.showTip'>
