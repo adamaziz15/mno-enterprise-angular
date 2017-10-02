@@ -1,6 +1,6 @@
 angular.module 'mnoEnterpriseAngular'
   .controller('AuthLoginCtrl',
-    (Auth, toastr, $state) ->
+    (Auth, toastr, $state, DEVISE_CONFIG) ->
       vm = @
 
       vm.login = ->

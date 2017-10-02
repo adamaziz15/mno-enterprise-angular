@@ -62,6 +62,14 @@ angular.module 'mnoEnterpriseAngular'
         controller: 'AuthConfirmCtrl'
         controllerAs: 'vm'
         public: true
+      .state 'confirmation_recovery',
+        data:
+          pageTitle: 'ConfirmationRecovery'
+        url: '/confirmation/new'
+        templateUrl: 'app/views/auth/confirmation/new.html'
+        controller: 'AuthConfirmRecoveryCtrl'
+        controllerAs: 'vm'
+        public: true
       .state 'password_recovery',
         data:
           pageTitle: 'PasswordRecovery'
