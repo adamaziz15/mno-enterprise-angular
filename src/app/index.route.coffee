@@ -107,6 +107,13 @@ angular.module 'mnoEnterpriseAngular'
         resolve:
           skipIfLoggedIn: (MnoeCurrentUser) ->
             MnoeCurrentUser.skipIfLoggedIn()
+      .state 'authorize',
+        data:
+          pageTitle: 'Authorization'
+        url: '/authorize?:redirect_path'
+        templateUrl: 'app/views/apps/authorize.html'
+        controller: 'AppAuthController'
+        controllerAs: 'vm'
       .state 'home',
         data:
           pageTitle:'Home'
