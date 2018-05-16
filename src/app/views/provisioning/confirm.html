@@ -62,6 +62,7 @@
           </span>
           {{ vm.subscription.max_licenses }}
         </div>
+        <div ng-show="vm.quoteBased" class="cell col-sm-1"></div>
 
         <div class="cell col-sm-3">
           <span class="cell-label visible-xs-inline">
@@ -84,7 +85,6 @@
               </span>
             </div>
           </div>
-
           <span ng-show="vm.quoteBased">
               {{ vm.quotedPrice }}
           </span>
